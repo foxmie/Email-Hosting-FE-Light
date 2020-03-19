@@ -1,0 +1,64 @@
+#
+# This file MUST be edited with the 'visudo' command as root.
+#
+# Please consider adding local content in /etc/sudoers.d/ instead of
+# directly modifying this file.
+#
+# See the man page for details on how to write a sudoers file.
+#
+Defaults	env_reset
+Defaults	mail_badpass
+Defaults	secure_path="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+
+# Host alias specification
+
+# User alias specification
+
+# Cmnd alias specification
+Cmnd_Alias ALIASCREATE = /core/alias/lib/create.sh
+Cmnd_Alias ALIASDELETE = /core/alias/lib/delete.sh
+Cmnd_Alias ALIASSET = /core/alias/lib/set.sh
+
+Cmnd_Alias CERTBOTCREATE = /core/certbot/lib/create.sh
+Cmnd_Alias CERTBOTDELETE = /core/certbot/lib/delete.sh
+Cmnd_Alias CERTBOTRENEW = /core/certbot/lib/renew.sh
+
+Cmnd_Alias DOMAINECREATE = /core/domaine/lib/create.sh
+Cmnd_Alias DOMAINEDELETE = /core/domaine/lib/delete.sh
+
+Cmnd_Alias MAILBOXCREATE = /core/mailbox/lib/create.sh
+Cmnd_Alias MAILBOXDELETE = /core/mailbox/lib/delete.sh
+Cmnd_Alias MAILBOXDISABLE = /core/mailbox/lib/disable.sh
+Cmnd_Alias MAILBOXENABLE = /core/mailbox/lib/enable.sh
+Cmnd_Alias MAILBOXSET = /core/mailbox/lib/set.sh
+
+Cmnd_Alias SERVICES = /core/services/services.sh
+
+# User privilege specification
+root	ALL=(ALL:ALL) ALL
+
+www-data ALL=(ALL) NOPASSWD: ALIASCREATE
+www-data ALL=(ALL) NOPASSWD: ALIASDELETE
+www-data ALL=(ALL) NOPASSWD: ALIASSET
+
+www-data ALL=(ALL) NOPASSWD: CERTBOTCREATE
+www-data ALL=(ALL) NOPASSWD: CERTBOTDELETE
+www-data ALL=(ALL) NOPASSWD: CERTBOTRENEW
+
+www-data ALL=(ALL) NOPASSWD: DOMAINECREATE
+www-data ALL=(ALL) NOPASSWD: DOMAINEDELETE
+
+www-data ALL=(ALL) NOPASSWD: MAILBOXCREATE
+www-data ALL=(ALL) NOPASSWD: MAILBOXDELETE
+www-data ALL=(ALL) NOPASSWD: MAILBOXDISABLE
+www-data ALL=(ALL) NOPASSWD: MAILBOXENABLE
+www-data ALL=(ALL) NOPASSWD: MAILBOXSET
+
+www-data ALL=(ALL) NOPASSWD: SERVICES
+
+# Allow members of group sudo to execute any command
+%sudo	ALL=(ALL:ALL) ALL
+
+# See sudoers(5) for more information on "#include" directives:
+
+#includedir /etc/sudoers.d

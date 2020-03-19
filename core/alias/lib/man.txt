@@ -1,0 +1,10 @@
+
+ # Ajouter un alias
+./emailhostingfe.sh "alias" "create" "source" "cible" 
+
+ # Modifier un alias
+./emailhostingfe.sh "alias" "set" "id" "source" "cible"
+
+ # Supprimer un alias
+./emailhostingfe.sh "alias" "delete" "id"
+

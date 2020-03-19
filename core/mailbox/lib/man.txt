@@ -1,0 +1,15 @@
+
+# Creation d'une boite mail
+./emailhostingfe.sh "mailbox" "create" "email" "password"
+
+# Modification d'une boite mail
+./emailhostingfe.sh "mailbox" "set" "email" "password"
+
+# Activation d'une boite mail
+./emailhostingfe.sh "mailbox" "enable""email"
+
+# Desactivation d'une boite mail
+./emailhostingfe.sh "mailbox" "disable" "email"
+
+# Suppression d'une boite mail
+./emailhostingfe.sh "mailbox" "delete" "email"

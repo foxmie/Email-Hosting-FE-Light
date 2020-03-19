@@ -1,0 +1,7 @@
+
+# Creation du domaine
+./emailhostingfe.sh "domaine" "create" "domaine" "sousdomaine"
+
+# Suppression du domaine
+./emailhostingfe.sh "domaine" "delete" "domaine" "sousdomaine"
+
