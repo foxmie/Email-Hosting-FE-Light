@@ -21,7 +21,7 @@ hostname=`hostname`
 mailmanpwd='Azerty1234!'
 roundcubepass='Azerty123!'
 mysqlroot='mysql1234'
-webhostingfepassword=`date +%s | sha256sum | base64 | head -c 25`
+emailhostingfepassword=`date +%s | sha256sum | base64 | head -c 25`
 
 # Mise a jour du serveur
 apt-get update && apt-get -y upgrade && apt-get -y dist-upgrade && apt-get -y full-upgrade
