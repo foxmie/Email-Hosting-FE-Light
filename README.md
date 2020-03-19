@@ -1,13 +1,11 @@
 # Email-Hosting-FE-Light
 Panel de gestion Email (Light)
-
-### Prérequis : 
+### Prérequis :
  - Debian 9
  - Accès root
  
-###  Clonage du repositories 
+###  Clonage du repositories
 ``apt-get update && apt-get -y install git``
-
  ``git clone https://github.com/alexis77370/Email-Hosting-FE-Light.git``
  
 ###  Installation du panel
@@ -20,7 +18,7 @@ Panel de gestion Email (Light)
 ###  Accès au panel de gestion :
  ``http://ipv4:8000``
  
-###  Le script d'installation installera et configurera automatiquement les services suivants : 
+###  Le script d'installation installera et configurera automatiquement les services suivants :
  - Apache2
  - CertBot
  - MariaDB

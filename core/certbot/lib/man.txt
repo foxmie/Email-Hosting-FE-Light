@@ -1,0 +1,11 @@
+
+ - Creer un certificat SSL Let's Encrypt
+./emailhostingfe.sh "certbot" "create" "domaine"
+
+ - Supprimmer un certificat SSL Let's Encrypt
+./emailhostingfe.sh "certbot" "delete" "domaine"
+
+ - Renouveller tout les certificats SSL Let's Encrypt
+./emailhostingfe.sh "certbot" "renew"
+
+
