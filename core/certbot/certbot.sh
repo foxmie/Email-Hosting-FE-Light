@@ -18,12 +18,12 @@ else
 	# Creation du certificat SSL Let's Encrypt
 	if [ $action = "create" ];then
 		echo -e "\e[42m Creation d'un certificat SSL Let's Encrypt \e[49m \n"
-		bash "$emp/lib/create.sh" "$2" "$3"
+		bash "$emp/lib/create.sh" "$2"
 
 	# Suppression du certificat SSL Let's Encrypt
 	elif [ $action = "delete" ];then
 		echo -e "\e[42m Suppression d'un certificat SSL Let's Encrypt \e[49m \n"
-		bash "$emp/lib/delete.sh" "$2" "$3"
+		bash "$emp/lib/delete.sh" "$2"
 
 	# Renouvellement des certificats SSL Let's Encrypt
 	elif [ $action = "renew" ];then

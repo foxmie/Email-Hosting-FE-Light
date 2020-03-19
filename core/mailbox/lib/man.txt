@@ -13,3 +13,4 @@
 
 # Suppression d'une boite mail
 ./emailhostingfe.sh "mailbox" "delete" "email"
+

@@ -24,22 +24,22 @@ else
 	# Domaine
 	if [ $lib = "domaine" ];then
 		echo -e "\e[42m Domaine \e[49m \n"
-		bash "$PWD/domaine/domaine.sh" "$2" "$3"
+		bash "$PWD/domaine/domaine.sh" "$2" "$3" "$4" "$5"
 
 	# Certbot
 	elif [ $lib = "certbot" ];then
 		echo -e "\e[42m Certbot \e[49m \n"
-		bash "$PWD/certbot/certbot.sh" "$2"
+		bash "$PWD/certbot/certbot.sh" "$2" "$3" "$4"
 
 	# MailBox
         elif [ $lib = "mailbox" ];then
                 echo -e "\e[42m MailBox \e[49m \n"
-                bash "$PWD/mailbox/mailbox.sh" "$2" "$3"
+                bash "$PWD/mailbox/mailbox.sh" "$2" "$3" "$4" "$5"
 
 	# Alias
         elif [ $lib = "alias" ];then
                 echo -e "\e[42m Alias \e[49m \n"
-                bash "$PWD/alias/alias.sh" "$2" "$3" "$4"
+                bash "$PWD/alias/alias.sh" "$2" "$3" "$4" "$5" "$6"
 
 	# Services
         elif [ $lib = "services" ];then
