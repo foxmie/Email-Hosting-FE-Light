@@ -138,8 +138,8 @@ mv /etc/dovecot/dovecot-sql.conf.ext /etc/dovecot/dovecot-sql.conf.ext.bak
 mv /etc/roundcube/apache.conf /etc/roundcube/apache.conf.bak
 mv /etc/roundcube/config.inc.php /etc/roundcube/config.inc.php.bak
 mv /etc/roundcube/plugins/password/config.inc.php /etc/roundcube/plugins/password/config.inc.php.bak
-mv /etc/fail2ban/filter.d/postfix.conf /etc/fail2ban/filter.d/postfix.conf.bak
-mv /etc/fail2ban/filter.d/roundcube-auth.conf /etc/fail2ban/filter.d/roundcube-auth.conf.bak
+#mv /etc/fail2ban/filter.d/postfix.conf /etc/fail2ban/filter.d/postfix.conf.bak
+#mv /etc/fail2ban/filter.d/roundcube-auth.conf /etc/fail2ban/filter.d/roundcube-auth.conf.bak
 mv /usr/share/roundcube/plugins/managesieve/config.inc.php /usr/share/roundcube/plugins/managesieve/config.inc.php.bak
 
 # Importation des fichiers de configuration
@@ -161,9 +161,9 @@ mv config/dovecot/dovecot-sql.conf.ext /etc/dovecot/dovecot-sql.conf.ext
 mv config/roundcube/apache.conf /etc/roundcube/apache.conf
 mv config/roundcube/config.inc.php /etc/roundcube/config.inc.php
 mv config/roundcube/plugins/password/config.inc.php /etc/roundcube/plugins/password/config.inc.php
-mv config/fail2ban/jail.local /etc/fail2ban/jail.local
-mv config/fail2ban/postfix.conf /etc/fail2ban/filter.d/postfix.conf
-mv config/fail2ban/roundcube-auth.conf /etc/fail2ban/filter.d/roundcube-auth.conf
+#mv config/fail2ban/jail.local /etc/fail2ban/jail.local
+#mv config/fail2ban/postfix.conf /etc/fail2ban/filter.d/postfix.conf
+#mv config/fail2ban/roundcube-auth.conf /etc/fail2ban/filter.d/roundcube-auth.conf
 cp /usr/share/roundcube/plugins/managesieve/config.inc.php.dist /etc/roundcube/plugins/managesieve/config.inc.php
 
 # Suppression du dossier config
