@@ -370,8 +370,31 @@ echo 'command[check_postfix]=/usr/lib/nagios/plugins/check_tcp -H 127.0.0.1 -p 2
 # Redemarrage du service Nagios
 service nagios-nrpe-server restart
 
-# Arret du service WEB
-service apache2 stop
+# Mise en place du fichier sudoers
+mv /etc/sudoers /etc/sudoers.bak
+mv sudoers /etc/sudoers
+chown root:root /etc/sudoers
+
+# Mise en place du core
+mv core /core
+chmod -R +x /core
+
+# Mise en place du panel
+mv app /app
+chown -R  debian:www-data /app
+mkdir /applogs
+
+# Creation de la base de donnees du panel
+mysql -e 'CREATE DATABASE `'emailhostingfe'`;'
+mysql -e 'GRANT ALL PRIVILEGES ON `'emailhostingfe'`.* TO `'emailhostingfe'`@`localhost` IDENTIFIED BY "'$emailhostingfepassword'";'
+mysql -e "flush privileges"
+
+# Population de la base de donnees
+mysql -u emailhostingfe -p$emailhostingfepassword emailhostingfe < emailhostingfe.sql
+rm emailhostingfe.sql
+
+# Mise en place du mot de passe de la base de donnees
+sed -i "s/emailhostingfepass/$emailhostingfepassword/g" /app/config/db.connect.php
 
 # Suppression des vhosts
 rm /etc/apache2/sites-enabled/*
@@ -419,33 +442,7 @@ echo "</VirtualHost>" >> /etc/apache2/sites-available/000-default.conf
 a2ensite 000-default
 
 # Redemarrage du service WEB
-service apache2 start
-
-# Mise en place du fichier sudoers
-mv /etc/sudoers /etc/sudoers.bak
-mv sudoers /etc/sudoers
-chown root:root /etc/sudoers
-
-# Mise en place du core
-mv core /core
-chmod -R +x /core
-
-# Mise en place du panel
-mv app /app
-chown -R  debian:www-data /app
-mkdir /applogs
-
-# Creation de la base de donnees du panel
-mysql -e 'CREATE DATABASE `'emailhostingfe'`;'
-mysql -e 'GRANT ALL PRIVILEGES ON `'emailhostingfe'`.* TO `'emailhostingfe'`@`localhost` IDENTIFIED BY "'$emailhostingfepassword'";'
-mysql -e "flush privileges"
-
-# Population de la base de donnees
-mysql -u emailhostingfe -p$emailhostingfepassword emailhostingfe < emailhostingfe.sql
-rm emailhostingfe.sql
-
-# Mise en place du mot de passe de la base de donnees
-sed -i "s/emailhostingfepass/$emailhostingfepassword/g" /app/config/db.connect.php
+service apache2 restart
 
 # Suppression des fichiers
 rm setup.sh
