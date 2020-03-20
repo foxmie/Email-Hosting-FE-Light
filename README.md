@@ -1,5 +1,8 @@
 # Email-Hosting-FE-Light
 Panel de gestion Email (Light)
+
+## Attention ! Produit en cours de développement. Il n'est pas fonctionnel du tout.
+
 ### Prérequis :
  - Debian 9
  - Accès root

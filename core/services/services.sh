@@ -22,26 +22,38 @@ else
 		echo -e "\e[42m Redemarrage du service de Base de Donnees \e[49m \n"
 		service mariadb-server restart
 
-	# Redemarrage du service de reception
-	elif [ $service = "reception" ];then
+	# Redemarrage du service dovecot
+	elif [ $service = "dovecot" ];then
 		echo -e "\e[42m Redemarrage du service de reception \e[49m \n"
 		dovecot reload
 		service dovecot restart
 
-	# Redemarrage du service d'envoi
-	elif [ $service = "envoi" ];then
+	# Redemarrage du service postfix
+	elif [ $service = "postfix" ];then
 		echo -e "\e[42m Redemarrage du service d'envoi \e[49m \n"
 		postfix reload
 		service postfix restart
 
-	# Redemarrage des services de protection
-	elif [ $service = "security" ];then
-		echo -e "\e[42m Redemarrage du service d'envoi \e[49m \n"
+	# Redemarrage du service fail2ban
+	elif [ $service = "fail2ban" ];then
+		echo -e "\e[42m Redemarrage du service  \e[49m \n"
+		service fail2ban restart
+
+	# Redemarrage du service spamassassin
+        elif [ $service = "spamassassin" ];then
+                echo -e "\e[42m Redemarrage du service  \e[49m \n"
 		service spamassassin restart
-		service spamassassin restart
+
+	# Redemarrage du service ClamAV
+        elif [ $service = "clamav" ];then
+                echo -e "\e[42m Redemarrage du service  \e[49m \n"
 		service clamav-daemon restart
 		service clamsmtp restart
-		service fail2ban restart
+
+	# Redemarrage des services iptables
+	elif [ $service = "iptables" ];then
+		echo -e "\e[42m Redemarrage du service d'envoi \e[49m \n"
+		service netfilter-persistent restart
 
 	# Commande inconnue
 	else
