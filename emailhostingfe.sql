@@ -1,161 +1,153 @@
--- phpMyAdmin SQL Dump
--- version 4.6.6deb4
--- https://www.phpmyadmin.net/
+-- MySQL dump 10.16  Distrib 10.1.44-MariaDB, for debian-linux-gnu (x86_64)
 --
--- Client :  localhost:3306
--- Généré le :  Ven 20 Mars 2020 à 04:51
--- Version du serveur :  10.1.44-MariaDB-0+deb9u1
--- Version de PHP :  7.0.33-0+deb9u7
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
-
+-- Host: localhost    Database: emailhostingfe
+-- ------------------------------------------------------
+-- Server version	10.1.44-MariaDB-0+deb9u1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8mb4 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Base de données :  `emailhostingfe`
+-- Table structure for table `aliases`
 --
 
--- --------------------------------------------------------
-
---
--- Structure de la table `aliases`
---
-
+DROP TABLE IF EXISTS `aliases`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `aliases` (
-  `id` int(25) NOT NULL,
+  `id` int(25) NOT NULL AUTO_INCREMENT,
   `user` text,
   `domain` text,
-  `destination` text
+  `destination` text,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Contenu de la table `aliases`
+-- Dumping data for table `aliases`
 --
 
-INSERT INTO `aliases` (`id`, `user`, `domain`, `destination`) VALUES
-(4, 'alias', 'test.be', 'alexis.gomy@icloud.com'),
-(5, 'alias', 'test.biz', 'alexis.gomy@icloud.com');
-
--- --------------------------------------------------------
+LOCK TABLES `aliases` WRITE;
+/*!40000 ALTER TABLE `aliases` DISABLE KEYS */;
+/*!40000 ALTER TABLE `aliases` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
--- Structure de la table `bindextension`
+-- Table structure for table `bindextension`
 --
 
+DROP TABLE IF EXISTS `bindextension`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `bindextension` (
-  `id` int(25) NOT NULL,
-  `extension` text
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
+  `id` int(25) NOT NULL AUTO_INCREMENT,
+  `extension` text,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Structure de la table `domaine`
+-- Dumping data for table `bindextension`
 --
 
+LOCK TABLES `bindextension` WRITE;
+/*!40000 ALTER TABLE `bindextension` DISABLE KEYS */;
+INSERT INTO `bindextension` VALUES (1,'.be'),(2,'.biz'),(3,'.com'),(4,'.eu'),(5,'.fr'),(6,'.info'),(7,'.net'),(8,'.org');
+/*!40000 ALTER TABLE `bindextension` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `domaine`
+--
+
+DROP TABLE IF EXISTS `domaine`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `domaine` (
-  `id` int(25) NOT NULL,
+  `id` int(25) NOT NULL AUTO_INCREMENT,
   `subdomain` text,
   `domain` text,
-  `letsencrypt` int(25) DEFAULT NULL
+  `letsencrypt` int(25) DEFAULT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Structure de la table `mailaddress`
+-- Dumping data for table `domaine`
 --
 
+LOCK TABLES `domaine` WRITE;
+/*!40000 ALTER TABLE `domaine` DISABLE KEYS */;
+/*!40000 ALTER TABLE `domaine` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `mailaddress`
+--
+
+DROP TABLE IF EXISTS `mailaddress`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `mailaddress` (
-  `id` int(25) NOT NULL,
+  `id` int(25) NOT NULL AUTO_INCREMENT,
   `user` text,
   `description` text,
   `domain` text,
-  `state` int(25) DEFAULT NULL
+  `state` int(25) DEFAULT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Structure de la table `users`
+-- Dumping data for table `mailaddress`
 --
 
+LOCK TABLES `mailaddress` WRITE;
+/*!40000 ALTER TABLE `mailaddress` DISABLE KEYS */;
+/*!40000 ALTER TABLE `mailaddress` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `users`
+--
+
+DROP TABLE IF EXISTS `users`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `users` (
-  `id` int(25) NOT NULL,
+  `id` int(25) NOT NULL AUTO_INCREMENT,
   `firstname` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
   `lastname` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
   `email` text CHARACTER SET utf8,
-  `password` text CHARACTER SET utf8
+  `password` text CHARACTER SET utf8,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Index pour les tables exportées
+-- Dumping data for table `users`
 --
 
---
--- Index pour la table `aliases`
---
-ALTER TABLE `aliases`
-  ADD PRIMARY KEY (`id`);
+LOCK TABLES `users` WRITE;
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
---
--- Index pour la table `bindextension`
---
-ALTER TABLE `bindextension`
-  ADD PRIMARY KEY (`id`);
-
---
--- Index pour la table `domaine`
---
-ALTER TABLE `domaine`
-  ADD PRIMARY KEY (`id`);
-
---
--- Index pour la table `mailaddress`
---
-ALTER TABLE `mailaddress`
-  ADD PRIMARY KEY (`id`);
-
---
--- Index pour la table `users`
---
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`);
-
---
--- AUTO_INCREMENT pour les tables exportées
---
-
---
--- AUTO_INCREMENT pour la table `aliases`
---
-ALTER TABLE `aliases`
-  MODIFY `id` int(25) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
---
--- AUTO_INCREMENT pour la table `bindextension`
---
-ALTER TABLE `bindextension`
-  MODIFY `id` int(25) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT pour la table `domaine`
---
-ALTER TABLE `domaine`
-  MODIFY `id` int(25) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT pour la table `mailaddress`
---
-ALTER TABLE `mailaddress`
-  MODIFY `id` int(25) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT pour la table `users`
---
-ALTER TABLE `users`
-  MODIFY `id` int(25) NOT NULL AUTO_INCREMENT;
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2020-03-20  5:35:44

@@ -375,28 +375,45 @@ rm /etc/apache2/sites-enabled/*
 rm /etc/apache2/sites-available/*
 
 # Creation du Vhost RoundCube
-echo "Listen 80" > /etc/apache2/sites-available/foxmieroundcube.conf
-echo "Listen 443" >> /etc/apache2/sites-available/foxmieroundcube.conf
-echo "" >> /etc/apache2/sites-available/foxmieroundcube.conf
-echo "<VirtualHost *>" >> /etc/apache2/sites-available/foxmieroundcube.conf
-echo "" >> /etc/apache2/sites-available/foxmieroundcube.conf
-echo "        ServerAdmin webmaster@localhost" >> /etc/apache2/sites-available/foxmieroundcube.conf
-echo "        DocumentRoot /var/lib/roundcube" >> /etc/apache2/sites-available/foxmieroundcube.conf
-echo "" >> /etc/apache2/sites-available/foxmieroundcube.conf
-echo "        ErrorLog /var/log/apache2/error.log" >> /etc/apache2/sites-available/foxmieroundcube.conf
-echo "        CustomLog /var/log/apache2/access.log combined" >> /etc/apache2/sites-available/foxmieroundcube.conf
-echo "" >> /etc/apache2/sites-available/foxmieroundcube.conf
-echo '<Directory "/var/lib/roundcube/">' >> /etc/apache2/sites-available/foxmieroundcube.conf
-echo "        Options FollowSymLinks" >> /etc/apache2/sites-available/foxmieroundcube.conf
-echo "        AllowOverride All" >> /etc/apache2/sites-available/foxmieroundcube.conf
-echo "        Order allow,deny" >> /etc/apache2/sites-available/foxmieroundcube.conf
-echo "        Allow from all" >> /etc/apache2/sites-available/foxmieroundcube.conf
-echo "    </Directory>" >> /etc/apache2/sites-available/foxmieroundcube.conf
-echo "" >> /etc/apache2/sites-available/foxmieroundcube.conf
-echo "</VirtualHost>" >> /etc/apache2/sites-available/foxmieroundcube.conf
+echo "Listen 80" > /etc/apache2/sites-available/000-default.conf
+echo "" >> /etc/apache2/sites-available/000-default.conf
+echo "<VirtualHost *>" >> /etc/apache2/sites-available/000-default.conf
+echo "" >> /etc/apache2/sites-available/000-default.conf
+echo "        ServerAdmin webmaster@localhost" >> /etc/apache2/sites-available/000-default.conf
+echo "        DocumentRoot /var/lib/roundcube" >> /etc/apache2/sites-available/000-default.conf
+echo "" >> /etc/apache2/sites-available/000-default.conf
+echo "        ErrorLog /var/log/apache2/error.log" >> /etc/apache2/sites-available/000-default.conf
+echo "        CustomLog /var/log/apache2/access.log combined" >> /etc/apache2/sites-available/000-default.conf
+echo "" >> /etc/apache2/sites-available/000-default.conf
+echo '<Directory "/var/lib/roundcube/">' >> /etc/apache2/sites-available/000-default.conf
+echo "        Options FollowSymLinks" >> /etc/apache2/sites-available/000-default.conf
+echo "        AllowOverride All" >> /etc/apache2/sites-available/000-default.conf
+echo "        Order allow,deny" >> /etc/apache2/sites-available/000-default.conf
+echo "        Allow from all" >> /etc/apache2/sites-available/000-default.conf
+echo "    </Directory>" >> /etc/apache2/sites-available/000-default.conf
+echo "" >> /etc/apache2/sites-available/000-default.conf
+echo "</VirtualHost>" >> /etc/apache2/sites-available/000-default.conf
+echo "" >> /etc/apache2/sites-available/000-default.conf
+echo "Listen 8000" > /etc/apache2/sites-available/000-default.conf
+echo "<VirtualHost *:8000>" >> /etc/apache2/sites-available/000-default.conf
+echo "	" >> /etc/apache2/sites-available/000-default.conf
+echo "    Alias /phpmyadmin /usr/share/phpmyadmin" >> /etc/apache2/sites-available/000-default.conf
+echo "    DocumentRoot /app" >> /etc/apache2/sites-available/000-default.conf
+echo "" >> /etc/apache2/sites-available/000-default.conf
+echo "    LogLevel warn" >> /etc/apache2/sites-available/000-default.conf
+echo "    ErrorLog /applogs/error.log" >> /etc/apache2/sites-available/000-default.conf
+echo "    CustomLog /applogs/access.log combined" >> /etc/apache2/sites-available/000-default.conf
+echo "" >> /etc/apache2/sites-available/000-default.conf
+echo "    <Directory /app>" >> /etc/apache2/sites-available/000-default.conf
+echo "        Options -Indexes +FollowSymLinks +MultiViews" >> /etc/apache2/sites-available/000-default.conf
+echo "        AllowOverride All" >> /etc/apache2/sites-available/000-default.conf
+echo "        Require all granted" >> /etc/apache2/sites-available/000-default.conf
+echo "    </Directory>" >> /etc/apache2/sites-available/000-default.conf
+echo "" >> /etc/apache2/sites-available/000-default.conf
+echo "</VirtualHost>" >> /etc/apache2/sites-available/000-default.conf
 
 # Activation de RoundCube
-a2ensite foxmieroundcube
+a2ensite 000-default
 
 # Redemarrage du service WEB
 systemctl reload apache2
