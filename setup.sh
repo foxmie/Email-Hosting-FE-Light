@@ -370,6 +370,9 @@ echo 'command[check_postfix]=/usr/lib/nagios/plugins/check_tcp -H 127.0.0.1 -p 2
 # Redemarrage du service Nagios
 service nagios-nrpe-server restart
 
+# Arret du service WEB
+service apache2 stop
+
 # Suppression des vhosts
 rm /etc/apache2/sites-enabled/*
 rm /etc/apache2/sites-available/*
@@ -416,7 +419,7 @@ echo "</VirtualHost>" >> /etc/apache2/sites-available/000-default.conf
 a2ensite 000-default
 
 # Redemarrage du service WEB
-systemctl reload apache2
+service apache2 start
 
 # Mise en place du fichier sudoers
 mv /etc/sudoers /etc/sudoers.bak
