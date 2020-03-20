@@ -394,7 +394,7 @@ echo "    </Directory>" >> /etc/apache2/sites-available/000-default.conf
 echo "" >> /etc/apache2/sites-available/000-default.conf
 echo "</VirtualHost>" >> /etc/apache2/sites-available/000-default.conf
 echo "" >> /etc/apache2/sites-available/000-default.conf
-echo "Listen 8000" > /etc/apache2/sites-available/000-default.conf
+echo "Listen 8000" >> /etc/apache2/sites-available/000-default.conf
 echo "<VirtualHost *:8000>" >> /etc/apache2/sites-available/000-default.conf
 echo "	" >> /etc/apache2/sites-available/000-default.conf
 echo "    Alias /phpmyadmin /usr/share/phpmyadmin" >> /etc/apache2/sites-available/000-default.conf
