@@ -27,6 +27,10 @@
 		$rowDomain = $database->single();
 		
 		$fodomaine = $rowDomain['domain'];
+		
+		if ( !empty($fodomaine)){
+			
+		
 ?>
 					<div class="container-fluid">
 						<div class="row">
@@ -38,14 +42,17 @@
 												<h4 class="card-title"><center><?= $rowDomain['domain'] ?></center></h4><hr>
 												<div class="row">
 													<div class="col-md-6">
-														<p>WebMail : <a href="http://<?= $rowDomain['subdomain'].'.'.$rowDomain['domain'] ?>"><?= $rowDomain['subdomain'].'.'.$rowDomain['domain'] ?></a></p>
+														<center><p>WebMail : <a href="http://<?= $rowDomain['subdomain'].'.'.$rowDomain['domain'] ?>"><?= $rowDomain['subdomain'].'.'.$rowDomain['domain'] ?></a></p></center>
+														</br><a href="?service=email"><button class="btn btn-primary"> <- Retournez à la gestion des domaines </button></a>
 													</div>
 													<div class="col-md-6">
 														<p><font color="orange"><i class="fa fa-exclamation-triangle"></i></font> Veuillez ajouter au serveur DNS du domaine, ces champs pour garantir son bon fonctionnement : </p>
-														<ul>
-															<li> IN MX 10 <?= $rowDomain['subdomain'] ?>.<?= $rowDomain['domain'] ?>.</li>
-															<li><?= $rowDomain['subdomain'] ?> IN A <?= $_SERVER['SERVER_ADDR'] ?></li>
-														</ul>
+														<center>
+															<ul>
+																<li> IN MX 10 <?= $rowDomain['subdomain'] ?>.<?= $rowDomain['domain'] ?>.</li>
+																<li><?= $rowDomain['subdomain'] ?> IN A <?= $_SERVER['SERVER_ADDR'] ?></li>
+															</ul>
+														</center>
 													</div>
 												</div>
 												<hr>
@@ -106,6 +113,19 @@
 															<div class="fresh-datatables">
 																<table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
 																	<thead>
+																		<?php
+																			
+																			// Récupération des informations depuis la base de données
+																			$database->query("SELECT * FROM mailaddress WHERE domain = '$fodomaine'");
+																			$rowMailaddress = $database->resultset();
+																			$maxMailaddress = $database->rowCount();
+																			
+																			// Vérification du nombre d'adresse mail
+																			if ( $maxMailaddress == '0' ){
+																				echo '<center></br><p><font color="orange"><i class="fa fa-exclamation-triangle"></i></font> Aucune adresse mail à affiché pour le domaine "'.$fodomaine.'" ! </p></center>';
+																			}else{
+																				
+																		?>
 																		<tr>
 																			<td width="15%"><center>Compte</center></td>
 																			<td width="35%"><center>Description</center></td>
@@ -114,13 +134,8 @@
 																	</thead>
 																	<tbody>
 																		<?php
-
-																			$database->query("SELECT * FROM mailaddress WHERE domain = '$fodomaine'");
-																			$rowMailaddress = $database->resultset();
-																			
-																			$maxMailaddress = $database->rowCount();
-																			for ($i=0; $i<$maxMailaddress; $i++) {
-																			
+																				// Affichage des adresses mails
+																				for ($i=0; $i<$maxMailaddress; $i++) {
 																		?>
 																		<tr>
 																			<td><center> <?= $rowMailaddress[$i]['user'].'@'.$rowMailaddress[$i]['domain'] ?> </center></td>
@@ -260,6 +275,7 @@
 																		</div>
 																		
 																		<?php
+																				}
 																			}
 																		?>
 																	</tbody>
@@ -350,6 +366,19 @@
 															<div class="fresh-datatables">
 																<table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
 																	<thead>
+																		<?php
+																			
+																			// Récupération des informations depuis la base de données
+																			$database->query("SELECT * FROM aliases WHERE domain = '$fodomaine'");
+																			$rowAliases = $database->resultset();
+																			$maxAliases = $database->rowCount();
+																			
+																			// Vérification du nombre d'alias
+																			if ( $maxAliases == '0' ){
+																				echo '<center></br><p><font color="orange"><i class="fa fa-exclamation-triangle"></i></font> Aucun alias à affiché pour le domaine "'.$fodomaine.'" ! </p></center>';
+																			}else{
+																				
+																		?>
 																		<tr>
 																			<td width="30%"><center>Alias</center></td>
 																			<td width="30%"><center>Destination</center></td>
@@ -358,12 +387,9 @@
 																	</thead>
 																	<tbody>
 																		<?php
-
-																			$database->query("SELECT * FROM aliases WHERE domain = '$fodomaine'");
-																			$rowAliases = $database->resultset();
 																			
-																			$maxAliases = $database->rowCount();
-																			for ($i=0; $i<$maxAliases; $i++) {
+																				// Affichage des alias
+																				for ($i=0; $i<$maxAliases; $i++) {
 																			
 																		?>
 																		<tr>
@@ -403,6 +429,7 @@
 																			</div>
 																		</div>
 																		<?php
+																				}
 																			}
 																		?>
 																	</tbody>
@@ -467,7 +494,44 @@
 						</div>
 					</div>
 <?php
+		}else{
+?>
+					<div class="container-fluid">
+						<div class="row">
+							<div class="col-md-12">
+								<div class="card">
+									<div class="row">
+										<div class="col-md-12">
+											<div class="card-header">
+												<h4 class="card-title"><center> Erreur Interne ! </center></h4><hr>
+												<p><center>Le domaine n'existe pas ! <a href="?service=email">Retournez à la gestion des domaines</a></center></p>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+<?php
+		}
 	}else{
-		echo 'Erreur interne </br> <a href="?service=email">Retour aux domaines</a>';
+?>
+					<div class="container-fluid">
+						<div class="row">
+							<div class="col-md-12">
+								<div class="card">
+									<div class="row">
+										<div class="col-md-12">
+											<div class="card-header">
+												<h4 class="card-title"><center> Erreur Interne ! </center></h4><hr>
+												<p><center> Aucun domaine n'est renseigné ! <a href="?service=email">Retournez à la gestion des domaines</a> </center></p>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+<?php
 	}
 ?>

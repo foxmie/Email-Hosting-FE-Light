@@ -77,6 +77,18 @@
 															<div class="fresh-datatables">
 																<table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
 																	<thead>
+																		<?php
+																			
+																			// Récupération des informations depuis la base de données
+																			$database->query('SELECT * FROM domaine');
+																			$rowDomain = $database->resultset();
+																			$maxDomain = $database->rowCount();
+																			
+																			// Vérification du nombre de domaine
+																			if ( $maxDomain == '0' ){
+																				echo '<center></br><p><font color="orange"><i class="fa fa-exclamation-triangle"></i></font> Aucun domaine à afficher ! </p></center>';
+																			}else{
+																		?>
 																		<tr>
 																			<td width="30%"><center>Domaine</center></td>
 																			<td width="30%"><center>WebMail</center></td>
@@ -85,12 +97,9 @@
 																	</thead>
 																	<tbody>
 																		<?php
-																		
-																			$database->query('SELECT * FROM domaine');
-																			$rowDomain = $database->resultset();
 																			
-																			$maxDomain = $database->rowCount();
-																			for ($i=0; $i<$maxDomain; $i++) {
+																				// Affichage des domaines
+																				for ($i=0; $i<$maxDomain; $i++) {
 																			
 																		?>
 																		<tr>
@@ -184,6 +193,7 @@
 																						<div class="modal-footer">
 																							<input type="hidden" name="action" value="delete" readonly />
 																							<input type="hidden" name="id" value="<?= $rowDomain[$i]['id'] ?>" readonly />
+																							<input type="hidden" name="domain" value="<?= $rowDomain[$i]['domain'] ?>" readonly />
 																							<button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
 																							<button type="submit" class="btn btn-primary">Supprimer</button>
 																						</div>
@@ -193,6 +203,7 @@
 																		</div>
 																		
 																		<?php
+																				}
 																			}
 																		?>
 																	</tbody>

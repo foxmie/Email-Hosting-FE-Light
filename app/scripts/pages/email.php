@@ -96,10 +96,11 @@
 			}else if ( $_POST['action'] == 'delete' ){
 				
 				// Protection des variables
-				if ( !empty($_POST['id']) ){
+				if ( !empty($_POST['id']) and !empty($_POST['domain']) ){
 					
 					// Recuperation des variables
 					$id = htmlspecialchars($_POST['id']);
+					$domain = htmlspecialchars($_POST['domain']);
 					
 					// Verification de la disponibilite du compte
 					$database->query("SELECT * FROM domaine WHERE id = :id");
@@ -109,6 +110,16 @@
 
 					if ($countfqdn > 0){
 						
+						// Suppression des adresse mail attaché au domaine
+						$database->query('DELETE FROM `mailaddress` WHERE domain = :domain');
+						$database->bind(':domain', $domain);
+						$database->execute();
+						
+						// Suppression des alias attaché au domaine
+						$database->query('DELETE FROM `aliases` WHERE domain = :domain');
+						$database->bind(':domain', $domain);
+						$database->execute();
+						
 						// Suppression du domaine
 						$database->query('DELETE FROM `domaine` WHERE id = :id');
 						$database->bind(':id', $id);
@@ -116,7 +127,7 @@
 						
 						// Définition de l'alerte
 						$_SESSION['tmp']['email']['type'] = 'success';
-						$_SESSION['tmp']['email']['msgbox'] = 'Le domaine a correctement été supprimé !';
+						$_SESSION['tmp']['email']['msgbox'] = 'Le domaine "'.$domain.'" a correctement été supprimé !';
 						
 						// Redirection
 						header('Location:../../?service=email');
